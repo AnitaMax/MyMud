@@ -48,7 +48,7 @@ public class Room {
 	public void removePlayer(Player player){
 	//用户退出后，清除用户在列表中内容，通知房间内其他玩家
 		playerList.remove(player.getId());
-		String s=player.getName()+"离开了"+this.getRoomName();
+		String s=player.getName()+"离开了"+this.getRoomName()+"\n";
 		for (Player p : playerList.values()) {
 			MessageManagement.showToPlayer(p, s);
 		}

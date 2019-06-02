@@ -99,7 +99,7 @@ public class Client extends JFrame {
 						setText(screen,"网络出现故障，请尝试重新连接");
 					}
 					catch (IOException e) {
-						e.printStackTrace();
+						setText(screen,"尚未连接到服务器，请先连接");
 					}
 					finally {
 						input.setText("");

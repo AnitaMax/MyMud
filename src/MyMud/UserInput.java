@@ -17,8 +17,8 @@ public class UserInput {
 			player.look(inputs[1]);
 		}
 		if (inputs[0].equals("quit")) {
-			RoomManagement.cityMap.get(player.getLocation()).removePlayer(player);
-			MessageManagement.removePlayerChannels(player.getId());
+			//RoomManagement.cityMap.get(player.getLocation()).removePlayer(player);
+			//MessageManagement.removePlayerChannels(player.getId());
 			return;
 		}
 		if (inputs[0].equals("e") || inputs[0].equals("east")) {
