@@ -10,11 +10,72 @@ public class Room {
 	private HashMap<CommonContent.DIRECTION, Room> neighbor = new HashMap<CommonContent.DIRECTION, Room>();
 	private HashMap<String, Player> playerList = new HashMap<String, Player>();
 	
+	private String roomDescription;
+	private String roomId;
+	private String roomName;
+	
+
+	/*以下为初始化代码*/
+	public Room() {
+		// TODO Auto-generated constructor stub
+	}
+	public Room(String id,String name,String des) {
+		roomId=id;
+		roomName=name;
+		roomDescription=des;
+	}
+	
+	//neighborid为初始化用的中间变量
+	private HashMap<CommonContent.DIRECTION, String> neighborid = new HashMap<CommonContent.DIRECTION, String>();
+	public void setRoom(CommonContent.DIRECTION d, String id) {
+		neighborid.put(d, id);
+	}
+	//将neighbor的id转换为Room并储存到neighbor中，并设置反向路径
+	public void changeIdToRoom() {
+		for (CommonContent.DIRECTION d : neighborid.keySet()) {
+			String idString=neighborid.get(d);
+			Room r=RoomManagement.cityMap.get(idString);
+			if (r!=null) {
+				neighbor.put(d, r);
+				//设置反向的路径
+				r.setRoom(StaticFunctions.getRDirection(d), this);
+			}
+			else {
+				System.err.println(roomName+"读取"+idString+"房间信息出错！");
+			}
+		}
+	}
 	void setRoom(CommonContent.DIRECTION d, Room r) {
 		neighbor.put(d, r);
-		// assert r.getRoom(d) == this;
+	}
+	
+	
+	/*以下为get set方法*/
+	public void setDescription(String roomDescription) {
+		this.roomDescription = roomDescription;
 	}
 
+	public String getDescription() {
+		return roomDescription;
+	}
+
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
+	}
+
+	public String getRoomId() {
+		return roomId;
+	}
+
+	public void SetRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	
 	public Room getRoom(CommonContent.DIRECTION d) {
 		if (neighbor.containsKey(d)) {
 			return neighbor.get(d);
@@ -22,17 +83,7 @@ public class Room {
 		return null;
 	}
 
-	private String roomDescription;
-	private String roomLooking;
-	private String roomId;
-	private String roomName;
-
-
-	public void exist(Player player, CommonContent.DIRECTION direction) {
-		
-
-	}
-
+	/*以下为一些被游戏中调用的方法*/
 	public void enter(Player player, CommonContent.DIRECTION direction) {
 		try {
 			neighbor.get(direction).addPlayer(player);
@@ -63,34 +114,11 @@ public class Room {
 		playerList.put(player.getId(), player);
 	}
 
-	public void setDescription(String roomDescription) {
-		this.roomDescription = roomDescription;
-	}
-
-	public String getDescription() {
-		return roomDescription;
-	}
-
-	public void setRoomId(String roomId) {
-		this.roomId = roomId;
-	}
-
-	public String getRoomId() {
-		return roomId;
-	}
-
-	public void SetRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-
-	public String getRoomName() {
-		return roomName;
-	}
 
 
 	public String getRoomLooking() {
 		// 房间名
-		roomLooking = roomName + "\t";
+		String roomLooking = roomName + "\t";
 		// 房间描述
 		// 应该由Client负责解析传输过来的字符（设定字体，每行字数）
 		int roomDescriptionLength = roomDescription.length();

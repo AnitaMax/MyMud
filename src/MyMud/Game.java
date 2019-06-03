@@ -10,10 +10,15 @@ public class Game {
 	DateBase db;
 
 	public Game() {
-		rm = new RoomManagement();
-		RoomManagement.creatRooms();
+		//init database
 		db = new DateBase();
 		db.link();
+		//init rooms
+		rm = new RoomManagement();
+		//RoomManagement.creatRooms();
+		String sqlString = "SELECT * FROM rooms;";
+		ResultSet rs = db.find(sqlString);
+		RoomManagement.creatRoomsFromDatabase(rs);
 	}
 
 	public Player login(String id, String password) throws NoSuchPlayerException {
