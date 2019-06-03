@@ -65,14 +65,19 @@ public class Client extends JFrame {
 		super("Mud Client");
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
+		
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
 		container.add(BorderLayout.CENTER, leftPanel);
 		container.add(BorderLayout.EAST, rightPanel);
 		leftPanel.setLayout(new BorderLayout());
+		
 		screen = new JTextArea();
 		screen.setEditable(false);
 		screen.setAutoscrolls(true);
+		screen.setLineWrap(true);
+		screen.setWrapStyleWord(true);
+		
 		JScrollPane jsp = new  JScrollPane(screen);
 		input = new JTextField();
 		connection = new JButton("conncet");
@@ -83,6 +88,7 @@ public class Client extends JFrame {
 		this.setSize(800, 600);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		input.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent arg0) {
 				char c=arg0.getKeyChar();

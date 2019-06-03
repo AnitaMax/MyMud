@@ -123,21 +123,7 @@ public class Room {
 		String roomLooking = roomName + "\t";
 		// 房间描述
 		// 应该由Client负责解析传输过来的字符（设定字体，每行字数）
-		int roomDescriptionLength = roomDescription.length();
-		if (roomDescriptionLength <= CommonContent.CHARS_PER_LINE)
-			roomLooking += roomDescription + "\t";
-		else {
-			int i;
-			for (i = 0; i <= roomDescriptionLength
-					- CommonContent.CHARS_PER_LINE; i = i
-					+ CommonContent.CHARS_PER_LINE) {
-				roomLooking += roomDescription.substring(i, i
-						+ CommonContent.CHARS_PER_LINE)
-						+ "\t";
-			}
-			roomLooking += roomDescription.substring(i, roomDescriptionLength)
-					+ "\t";
-		}
+		roomLooking += roomDescription + "\t";
 
 		// 房间出口
 		roomLooking += getChuKou() + "\t";
