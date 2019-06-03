@@ -6,8 +6,8 @@ import MyMud.exceptions.NoSuchPlayerException;
 
 //用于（用数据库）初始化游戏内房间 玩家 npc 
 public class Game {
-	RoomManagement rm;
-	DateBase db;
+	static RoomManagement rm;
+	static DateBase db;
 
 	public Game() {
 		//init database
@@ -19,6 +19,14 @@ public class Game {
 		String sqlString = "SELECT * FROM rooms;";
 		ResultSet rs = db.find(sqlString);
 		RoomManagement.creatRoomsFromDatabase(rs);
+	}
+	
+	public static void update(String table,String id,String col,String data) {
+		String sqlString = "UPDATE "+table+" SET "+col+" ='"+data+"' WHERE id='" + id + "';";
+		int n=db.Update(sqlString);
+		if (n!=1) {
+			System.err.println("更新数据库错误！"+table+" "+id+" "+col+" "+data+"\n");
+		}
 	}
 
 	public Player login(String id, String password) throws NoSuchPlayerException {

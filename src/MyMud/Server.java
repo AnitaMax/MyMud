@@ -140,9 +140,15 @@ public class Server {
 			} else {
 				try {
 					curPlayer = game.login(id, password);
+					if (MessageManagement.playerChannels.containsKey(curPlayer.getId())) {
+						writer.write("此用户已登陆！\n");
+						curPlayer=null;
+						return;
+					}
 					writer.write("您已成功登录\t");
 					MessageManagement.addPlayerChannels(curPlayer.getId(), writer);
 					RoomManagement.cityMap.get(curPlayer.getLocation()).addPlayer(curPlayer);
+					writer.write(RoomManagement.cityMap.get(curPlayer.getLocation()).getRoomName()+"\t");
 					writer.write(RoomManagement.cityMap.get(curPlayer.getLocation()).getDescription()+"\n");
 				} catch (NoSuchPlayerException e) {
 					writer.write("账号或密码错误！\n");

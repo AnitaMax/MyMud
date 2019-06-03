@@ -86,11 +86,13 @@ public class Room {
 	/*以下为一些被游戏中调用的方法*/
 	public void enter(Player player, CommonContent.DIRECTION direction) {
 		try {
-			neighbor.get(direction).addPlayer(player);
-			player.setLocation(neighbor.get(direction).roomId);
-			MessageManagement.showToPlayer(player, "你已进入了"+neighbor.get(direction).roomName+"\n");
-			MessageManagement.showToPlayer(player, neighbor.get(direction).getDescription()+"\n");
+			Room des=neighbor.get(direction);
+			des.addPlayer(player);
+			player.setLocation(des.roomId);
+			MessageManagement.showToPlayer(player, "你已进入了"+des.roomName+"\n");
+			MessageManagement.showToPlayer(player, des.getDescription()+"\n");
 			this.removePlayer(player);
+			Game.update("players", player.getId(), "location", des.roomId);
 		} catch (NullPointerException e) {
 			MessageManagement.showToPlayer(player, "这个方向没有路\n");
 		}
