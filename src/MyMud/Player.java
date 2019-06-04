@@ -1,5 +1,8 @@
 package MyMud;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.Spring;
 
 import MyMud.common.CommonContent;
@@ -18,7 +21,7 @@ public class Player {
 	private String username;//用户名
 	private String party;//党派
 	private String location;//所处地点
-
+	private Map<String,Item> itemlist=new HashMap<String, Item>() ;
 	public Player() {
 		this.experience = 100;
 		this.con = 100;
@@ -35,6 +38,7 @@ public class Player {
 		this.username =  "default";
 		this.party ="无";
 		this.location = "yangzhou_guangchang";
+		
 	}
 	public Player(int experience,int con,int dex,int str,int wis,int hp,int max_hp,int nl,int max_nl,int jl,int max_jl,String id,String username,String party,String location){
 		this.experience = experience;
@@ -52,8 +56,14 @@ public class Player {
 		this.username = username;
 		this.party = party;
 		this.location = location;
+		Game.initItems(this);
 	}
 
+	
+	public void putItem(Item i) {
+		itemlist.put(i.getId(), i);
+		//to add
+	}
 	public void move(CommonContent.DIRECTION direction) {
 		Room nextRoom=RoomManagement.cityMap.get(location).getRoom(direction);
 		

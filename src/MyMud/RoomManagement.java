@@ -36,6 +36,7 @@ public class RoomManagement {
 		}
 		for (Room r : cityMap.values()) {
 			r.changeIdToRoom();
+			Game.initItems(r);
 		}
 	}
 	

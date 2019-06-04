@@ -9,6 +9,7 @@ public class Room {
 
 	private HashMap<CommonContent.DIRECTION, Room> neighbor = new HashMap<CommonContent.DIRECTION, Room>();
 	private HashMap<String, Player> playerList = new HashMap<String, Player>();
+	private Map<String,Item> itemlist=new HashMap<String, Item>() ;
 	
 	private String roomDescription;
 	private String roomId;
@@ -82,7 +83,12 @@ public class Room {
 		}
 		return null;
 	}
-
+	
+	public void putItem(Item i) {
+		itemlist.put(i.getId(), i);
+		//to add
+	}
+	
 	/*以下为一些被游戏中调用的方法*/
 	public void enter(Player player, CommonContent.DIRECTION direction) {
 		try {

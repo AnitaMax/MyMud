@@ -20,7 +20,32 @@ public class Game {
 		ResultSet rs = db.find(sqlString);
 		RoomManagement.creatRoomsFromDatabase(rs);
 	}
-	
+	public static void initItems(Player p) {
+		String sqlString = "SELECT * FROM items WHERE ownertype='player' and owner='"+p.getId()+"'";
+		ResultSet rs = db.find(sqlString);
+		try {
+			if (rs.next()) {
+				Item i=new Item(rs.getString("id"), rs.getString("name"), rs.getString("descripition"), rs.getString("owner"), rs.getString("ownertype"));
+				p.putItem(i);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void initItems(Room r) {
+		String sqlString = "SELECT * FROM items WHERE ownertype='room' and owner='"+r.getRoomId()+"'";
+		ResultSet rs = db.find(sqlString);
+		try {
+			if (rs.next()) {
+				Item i=new Item(rs.getString("id"), rs.getString("name"), rs.getString("descripition"), rs.getString("owner"), rs.getString("ownertype"));
+				r.putItem(i);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static void update(String table,String id,String col,String data) {
 		String sqlString = "UPDATE "+table+" SET "+col+" ='"+data+"' WHERE id='" + id + "';";
 		int n=db.Update(sqlString);
@@ -167,4 +192,5 @@ public class Game {
 		}
 
 	}
+
 }
