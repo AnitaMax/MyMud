@@ -90,6 +90,20 @@ public class Room {
 	}
 	
 	/*以下为一些被游戏中调用的方法*/
+	public boolean itemBeget(String itemid,Player p) {
+		if (!itemlist.containsKey(itemid)) {
+			return false;
+		}
+		Item i=this.itemlist.get(itemid);
+		p.getIterm(i);
+		itemlist.remove(itemid);
+		return true;
+	}
+	public void itemBeDropped(Item i) {
+		Game.update("items", i.getId(), "ownertype", "room");
+		Game.update("items", i.getId(), "owner", getRoomId());
+		putItem(i);
+	}
 	public void enter(Player player, CommonContent.DIRECTION direction) {
 		try {
 			Room des=neighbor.get(direction);
@@ -134,7 +148,10 @@ public class Room {
 		// 房间出口
 		roomLooking += getChuKou() + "\t";
 		// 房间npc
-
+		
+		//房间物品
+		roomLooking += listRoomItems() + "\t";
+		
 		// 房间player
 		roomLooking += listRoomPlayers();
 		// 房间obj
@@ -145,6 +162,17 @@ public class Room {
 		String temp = "这里有";
 		for (Player p : playerList.values()) {
 			temp=temp+p.getName()+"\t";
+		}
+		return temp;
+	}
+	private String listRoomItems(){
+		if (itemlist.isEmpty()) {
+			return "";
+		}
+		//列出这个房间中的所有物品
+		String temp = "这里有物品:";
+		for (Item i : itemlist.values()) {
+			temp=temp+i.getName()+"("+i.getId()+")\t";
 		}
 		return temp;
 	}

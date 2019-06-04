@@ -23,7 +23,7 @@ public class Item {
 	public String getId() {
 		return this.id;
 	}
-	public String getNmae() {
+	public String getName() {
 		return this.name;
 	}
 	public String getDescripition() {

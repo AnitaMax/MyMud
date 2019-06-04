@@ -21,6 +21,24 @@ public class UserInput {
 			//MessageManagement.removePlayerChannels(player.getId());
 			return;
 		}
+		if (inputs[0].equals("hp")) {
+			MessageManagement.showToPlayer(player, player.getState());
+			return;
+		}
+		if (inputs[0].equals("get")&&inputs.length>=2) {
+			boolean success=player.getRoom().itemBeget(inputs[1], player);
+			if (!success) {
+				MessageManagement.showToPlayer(player, "物品不存在！\n");
+			}
+			return;
+		}
+		if (inputs[0].equals("drop")&&inputs.length>=2) {
+			boolean success=player.dropIterm(inputs[1]);
+			if (!success) {
+				MessageManagement.showToPlayer(player, "物品不存在！\n");
+			}
+			return;
+		}
 		if (inputs[0].equals("e") || inputs[0].equals("east")) {
 			RoomManagement.cityMap.get(player.getLocation()).enter(player, CommonContent.DIRECTION.EAST);
 			return;
