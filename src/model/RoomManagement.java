@@ -1,13 +1,13 @@
-package MyMud;
+package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import MyMud.common.CommonContent;
+import common.CommonContent;
 
 public class RoomManagement {
-	static Map<String, Room> cityMap = new HashMap<String, Room>();
+	static public Map<String, Room> cityMap = new HashMap<String, Room>();
 
 	public static void creatRoomsFromDatabase(ResultSet rs) {
 		try {

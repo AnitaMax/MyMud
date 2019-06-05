@@ -1,9 +1,10 @@
-package MyMud;
+package model;
 import java.util.*;
 
-import MyMud.common.CommonContent;
-import MyMud.common.CommonContent.DIRECTION;
-import MyMud.common.StaticFunctions;
+import common.CommonContent;
+import common.StaticFunctions;
+import common.CommonContent.DIRECTION;
+import controller.MessageManagement;
 
 public class Room {
 

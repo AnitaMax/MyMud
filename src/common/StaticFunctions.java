@@ -1,6 +1,6 @@
-package MyMud.common;
+package common;
 
-import MyMud.common.CommonContent.DIRECTION;
+import common.CommonContent.DIRECTION;
 
 public class StaticFunctions {
 	public static String getDirection(CommonContent.DIRECTION direction){

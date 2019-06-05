@@ -1,12 +1,13 @@
-package MyMud;
+package model;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.Spring;
 
-import MyMud.Game.DateBase;
-import MyMud.common.CommonContent;
+import common.CommonContent;
+import controller.MessageManagement;
+
 
 public class Player {
 

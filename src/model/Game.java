@@ -1,8 +1,8 @@
-package MyMud;
+package model;
 
 import java.sql.*;
 
-import MyMud.exceptions.NoSuchPlayerException;
+import exceptions.NoSuchPlayerException;
 
 //用于（用数据库）初始化游戏内房间 玩家 npc 
 public class Game {

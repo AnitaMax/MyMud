@@ -1,4 +1,4 @@
-package MyMud;
+package view;
 import java.awt.List;
 import java.io.*;
 import java.net.*;
@@ -8,7 +8,12 @@ import javax.swing.text.DefaultStyledDocument;
 
 import org.omg.CosNaming.NamingContextExtOperations;
 
-import MyMud.exceptions.NoSuchPlayerException;
+import controller.MessageManagement;
+import controller.UserInput;
+import exceptions.NoSuchPlayerException;
+import model.Game;
+import model.Player;
+import model.RoomManagement;
 
 public class Server {
 

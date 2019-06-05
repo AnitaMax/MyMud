@@ -1,5 +1,7 @@
-package MyMud;
-import MyMud.common.CommonContent;
+package controller;
+import common.CommonContent;
+import model.Player;
+import model.RoomManagement;
 public class UserInput {
 	public static void dealInput(Player player, String inputMessage) {
 		/*

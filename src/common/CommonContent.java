@@ -1,4 +1,4 @@
-package MyMud.common;
+package common;
 
 public interface CommonContent {
 	String CANNOTMOVE = "这个方向没有出路。";

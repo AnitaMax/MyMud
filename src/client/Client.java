@@ -2,7 +2,7 @@ package client;
 import java.io.*;
 import javax.swing.*;
 
-import MyMud.Game;
+import model.Game;
 
 import java.net.*;
 import java.awt.*;
